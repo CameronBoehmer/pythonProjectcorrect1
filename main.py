@@ -334,6 +334,7 @@ def move_lvl6():
         pygame.draw.rect(screen, NAVY, f)
     # Player Functions
 
+mode = 'grow'
 
 def move_lvl7():
     for i in Ene7:
@@ -348,16 +349,27 @@ def move_lvl7():
         pygame.draw.rect(screen, ORANGE, g)
         asteroid = pygame.transform.scale(asteroid_img, (g.width, g.height))
         screen.blit(asteroid, (g.x, g.y))
-    mode = 'grow'
     for h in Ene7special2:
         pygame.time.delay(1)
         h.x -= 4
-        if h.height >= 170 and mode == 'grow':
-            h.height += 1
-        if h.height >= 170 and mode == 'shrink':
-            h.height += 1
-        else:
-            h.height += 1
+        # if h.height >= 170 and mode == 'grow':
+        #     h.height += 1
+        # if h.height >= 170 and mode == 'shrink':
+        #     h.height += 1
+        # else:
+        #     h.height += 1
+        global mode
+        if mode == 'grow':
+            if h.height >= 170:
+                mode = 'shrink'
+            else:
+                h.height += 1
+        if mode == 'shrink':
+            if h.height <= 0:
+                mode = 'grow'
+            else:
+                h.height -= 1
+
         pygame.draw.rect(screen, GREEN, h)
 
 
