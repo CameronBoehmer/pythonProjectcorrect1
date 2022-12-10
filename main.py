@@ -1,4 +1,4 @@
-#Questions
+# Questions
 '''
 Where is the best place to get images? (Or make them)
 How do I make the backgrounds transparent?
@@ -24,7 +24,6 @@ Y = 390
 RED = (140, 0, 0)
 
 BLACK = (72, 82, 82)
-
 
 pygame.time.set_timer(pygame.KEYDOWN, 1000)
 screen = pygame.display.set_mode((X, Y))
@@ -56,7 +55,6 @@ lforunion = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 1
 
 REDTEXT = (255, 0, 0)
 GREENTEXT = (0, 255, 0)
-BLACK = (0, 0, 0)
 GREEN = (107, 235, 52)
 BROWN = (92, 3, 3)
 WHITE = (255, 255, 255)
@@ -87,7 +85,7 @@ class Box:
         self.X = n_X
 
 
-box = Box(0, 0, 70, 30)
+box = Box(0, 0, 67, 30)
 
 
 # Functions
@@ -96,7 +94,7 @@ def enemies_lvl1():
     xy1 = random.randint(25, 50)
     Ene1.append(pygame.Rect(699, random.randint(1, 340), xy1, xy1))
     pygame.draw.rect(screen, RED, Ene1[-1])
-    for i in range(0, 12):
+    for i in range(0, 10):
         xy = random.randint(25, 50)
         Ene1.append(pygame.Rect(random.randint(700, 2000), random.randint(1, 340), xy, xy))
         pygame.draw.rect(screen, RED, Ene1[-1])
@@ -104,19 +102,20 @@ def enemies_lvl1():
         asteroid = pygame.transform.scale(asteroid_img, (xy, xy))
         screen.blit(asteroid, (i.x, i.y))
 
-#Lvl1 - 12 - 3
-#Lvl 2 - 12 - 4
-#Lvl 3 - 9 - 4 - 6
-#Lvl 4 - 10 - 5 - 6
-#Lvl 5 - 9 - 4 - 3 - 6
-#Lvl 6 - 9 - 5 - 3 - 2 - 7
-#Lvl 7 - 10 - 5 - 4 - 6
+
+# Lvl1 - 12 - 3
+# Lvl 2 - 12 - 4
+# Lvl 3 - 9 - 4 - 6
+# Lvl 4 - 10 - 5 - 6
+# Lvl 5 - 9 - 4 - 3 - 6
+# Lvl 6 - 9 - 5 - 3 - 2 - 7
+# Lvl 7 - 10 - 5 - 4 - 6
 
 def enemies_lvl2():
     xy1 = random.randint(25, 52)
     Ene2.append(pygame.Rect(699, random.randint(1, 340), xy1, xy1))
     pygame.draw.rect(screen, RED, Ene2[-1])
-    for i in range(0, 12):
+    for i in range(0, 10):
         xy = random.randint(25, 52)
         Ene2.append(pygame.Rect(random.randint(700, 1700), random.randint(1, 340), xy, xy))
         pygame.draw.rect(screen, RED, Ene2[-1])
@@ -147,9 +146,10 @@ def enemies_lvl4():
         xy2 = random.randint(25, 52)
         Ene4special.append(pygame.Rect(random.randint(1500, 5000), random.randint(1, 340), xy2, xy2))
         pygame.draw.rect(screen, ORANGE, Ene4special[-1])
-    for i in Ene4sspecial:
+    for i in Ene4special:
         asteroid = pygame.transform.scale(asteroid_img, (xy2, xy2))
         screen.blit(asteroid, (i.x, i.y))
+
 
 def enemies_lvl5():
     xy1 = random.randint(25, 52)
@@ -243,6 +243,8 @@ def enemies_lvl9():
     for i in range(0, 7):
         Ene9special2.append(pygame.Rect(random.randint(700, 3800), random.randint(1, 340), 50, 50))
         pygame.draw.rect(screen, YELLOW, Ene9special2[-1])
+
+
 # Move Functions
 
 
@@ -288,7 +290,7 @@ def move_lvl4():
         pygame.time.delay(1)
         j.x -= 10
         pygame.draw.rect(screen, ORANGE, j)
-        asteroid = pygame.transform.scale(asteroid_img, (g.width, g.height))
+        asteroid = pygame.transform.scale(asteroid_img, (j.width, j.height))
         screen.blit(asteroid, (j.x, j.y))
 
 
@@ -334,7 +336,9 @@ def move_lvl6():
         pygame.draw.rect(screen, NAVY, f)
     # Player Functions
 
+
 mode = 'grow'
+
 
 def move_lvl7():
     for i in Ene7:
@@ -365,7 +369,7 @@ def move_lvl7():
             else:
                 h.height += 1
         if mode == 'shrink':
-            if h.height <= 0:
+            if h.height <= 50:
                 mode = 'grow'
             else:
                 h.height -= 1
@@ -389,7 +393,7 @@ def move_lvl8():
         h.x -= 4
         pygame.draw.rect(screen, YELLOW, h)
         if h.x <= 270:
-            '''#Ene8special2.append(pygame.Rect(h.x - 50, h.y, h.width, h.height))
+            '''Ene8special2.append(pygame.Rect(h.x - 50, h.y, h.width, h.height))
             pygame.draw.rect(screen, RED, Ene8special2[-1])
             Ene8special2.append(pygame.Rect(h.x, h.y - 50, h.width, h.height))
             pygame.draw.rect(screen, RED, Ene8special2[-1])
@@ -406,6 +410,8 @@ def move_lvl8():
         #     pygame.draw.rect(screen, GREEN, (h.x, h.y - 50, 20, 60))
         # if arms_count <= 0:
         #     arms_count = 100'''
+
+
 def get_pos():
     pos = pygame.mouse.get_pos()
     return pos
@@ -420,7 +426,7 @@ def move_player():
 def collides(playerrect, enelist):
     collide = playerrect.collidelist(enelist)
     if collide > -1:
-        #playerrect = pygame.draw.rect(screen, RED, box.to_tuple())
+        # playerrect = pygame.draw.rect(screen, RED, box.to_tuple())
         explosion.set_colorkey((255, 255, 255))
         screen.blit(explosion, box.to_tuple())
         global gameover
@@ -472,24 +478,20 @@ lvl3Rect = lvl3font.get_rect()
 lvl3Rect.center = (X // 2, Y // 2)
 lvl3fonttime = 90
 
-
 lvl4font = font.render('Level 4', True, GREENTEXT, BLACK)
 lvl4Rect = lvl4font.get_rect()
 lvl4Rect.center = (X // 2, Y // 2)
 lvl4fonttime = 90
-
 
 lvl5font = font.render('Level 5', True, GREENTEXT, BLACK)
 lvl5Rect = lvl5font.get_rect()
 lvl5Rect.center = (X // 2, Y // 2)
 lvl5fonttime = 90
 
-
 lvl6font = font.render('Level 6', True, GREENTEXT, BLACK)
 lvl6Rect = lvl6font.get_rect()
 lvl6Rect.center = (X // 2, Y // 2)
 lvl6fonttime = 90
-
 
 lvl7font = font.render('Level 7', True, GREENTEXT, BLACK)
 lvl7Rect = lvl7font.get_rect()
@@ -542,9 +544,9 @@ lvl6 = False
 lvl6act = False
 lvl6count = 0
 
-lvl7_create = True
+lvl7_create = False
 lvl7 = False
-lvl7act = True
+lvl7act = False
 lvl7count = 0
 
 lvl8_create = False
@@ -556,12 +558,12 @@ lvl9_create = False
 lvl9 = False
 lvl9act = False
 lvl9count = 0
-#Images
+# Images
 player_img = pygame.image.load('player_rocket.png').convert_alpha()
 icon = pygame.image.load('icon.png')
 player = pygame.transform.scale(player_img, (70, 60)).convert_alpha()
-#player = pygame.Surface.set_alpha(player_img, 100)
-#([10, 10], pygame.SRCALPHA, 32, player_img)
+# player = pygame.Surface.set_alpha(player_img, 100)
+# ([10, 10], pygame.SRCALPHA, 32, player_img)
 
 player_explosion = pygame.image.load('player_explosion.png').convert()
 explosion = pygame.transform.scale(player_explosion, (70, 60)).convert()
@@ -569,13 +571,10 @@ explosion = pygame.transform.scale(player_explosion, (70, 60)).convert()
 music = pygame.mixer.music.load('space-chillout-14194.mp3')
 pygame.mixer.music.play(100)
 
-
-
 asteroid_img = pygame.image.load('enemy_asteroid.png').convert()
 
-
-#player.set_colorkey((255, 255, 255))
-#player.set_colorkey((175, 175, 175))
+# player.set_colorkey((255, 255, 255))
+# player.set_colorkey((175, 175, 175))
 # Game Loop
 while running:
     for event in pygame.event.get():
@@ -584,21 +583,21 @@ while running:
 
     # Set Up
 
-    #pygame.draw.rect(screen, player, box.to_tuple())
+    # pygame.draw.rect(screen, player, box.to_tuple())
     pygame.display.set_icon(icon)
     screen.fill(BLACK)
     playerrect = pygame.draw.rect(screen, WHITE, box.to_tuple())
     screen.blit(player, (box.X, box.Y))
     move_player()
     # Text Level 1
-    '''if text:
+    if text:
         screen.blit(lvl1font, lvl1Rect)
         pygame.display.flip()
 
         # Level 1
     if lvl1act:
         collides(playerrect, Ene1)
-        pygame.display.set_caption('Dodge the Box - Level 1')
+        pygame.display.set_caption('Space Odyssey - Level 1')
         if lvl1fonttime > 0:
             screen.blit(lvl1font, lvl1Rect)
             lvl1fonttime -= 1
@@ -615,7 +614,7 @@ while running:
         #     pygame.display.flip()
         #     lvl2_create = True
         #     lvl2act = True
-            if -1300 >= Ene1[0].x >= -1600:
+            if -1250 >= Ene1[0].x >= -1550:
                 Ene1.clear()
                 lvl1count += 1
                 lvl1_create = True
@@ -632,7 +631,7 @@ while running:
             screen.blit(lvl2font, lvl2Rect)
             lvl2fonttime -= 1
         collides(playerrect, Ene2)
-        pygame.display.set_caption('Dodge the Box - Level 2')
+        pygame.display.set_caption('Space Odyssey - Level 2')
         Ene1.clear()
         lvl1act = False
         if lvl2_create:
@@ -665,7 +664,7 @@ while running:
             lvl3fonttime -= 1
         collides(playerrect, Ene3)
         collides(playerrect, Ene3special)
-        pygame.display.set_caption('Dodge the Box - Level 3')
+        pygame.display.set_caption('Space Odyssey - Level 3')
         Ene2.clear()
         lvl2act = False
         if lvl3_create:
@@ -674,7 +673,7 @@ while running:
             lvl3_create = False
         if lvl3:
             move_lvl3()
-            if -1500 >= Ene3[0].x >= -1850:
+            if -1300 >= Ene3[0].x >= -1650:
                 Ene3.clear()
                 Ene3special.clear()
                 lvl3count += 1
@@ -694,7 +693,7 @@ while running:
             lvl4fonttime -= 1
         collides(playerrect, Ene4)
         collides(playerrect, Ene4special)
-        pygame.display.set_caption('Dodge the Box - Level 4')
+        pygame.display.set_caption('Space Odyssey - Level 4')
         Ene3.clear()
         Ene3special.clear()
         lvl3act = False
@@ -731,7 +730,7 @@ while running:
         #collides(playerrect, Ene5)
         #collides(playerrect, Ene5special)
         #collides(playerrect, Ene5special2)
-        pygame.display.set_caption('Dodge the Box - Level 5')
+        pygame.display.set_caption('Space Odyssey - Level 5')
         Ene4.clear()
         Ene4special.clear()
         lvl4act = False
@@ -765,7 +764,7 @@ while running:
         #collides(playerrect, Ene6)
         #collides(playerrect, Ene6special)
         #collides(playerrect, Ene6special2)
-        pygame.display.set_caption('Dodge the Box - Level 6')
+        pygame.display.set_caption('Space Odyssey - Level 6')
         Ene5.clear()
         Ene5special.clear()
         lvl5act = False
@@ -792,16 +791,16 @@ while running:
                 Ene6special3.clear()
                 lvl6act = False
                 lvl7_create = True
-                lvl7act = True'''
+                lvl7act = True
 
     if lvl7act:
         if lvl7fonttime > 0:
             screen.blit(lvl7font, lvl7Rect)
             lvl7fonttime -= 1
-        #collides(playerrect, Ene7)
-        #collides(playerrect, Ene7special)
-        #collides(playerrect, Ene7special2)
-        pygame.display.set_caption('Dodge the Box - Level 7')
+        collides(playerrect, Ene7)
+        collides(playerrect, Ene7special)
+        collides(playerrect, Ene7special2)
+        pygame.display.set_caption('Space Odyssey - Level 7')
         Ene6.clear()
         Ene6special.clear()
         lvl6act = False
@@ -835,7 +834,7 @@ while running:
         # collides(playerrect, Ene8)
         # collides(playerrect, Ene8special)
         # collides(playerrect, Ene8special2)
-        pygame.display.set_caption('Dodge the Box - Level 8')
+        pygame.display.set_caption('Space Odyssey - Level 8')
         Ene7.clear()
         Ene7special.clear()
         lvl7act = False
